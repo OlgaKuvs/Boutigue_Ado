@@ -14,14 +14,14 @@ def add_to_bag(request, item_id):
     quantity = int(request.POST.get('quantity'))
     redirect_url = request.POST.get('redirect_url')
     bag = request.session.get('bag', {})
-    print('BAG1', bag)
+    # print('BAG1', bag)
 
     if item_id in list(bag.keys()):
         bag[item_id] += quantity
     else:
         bag[item_id] = quantity
-    print('BAG2', bag[item_id])
+    # print('BAG2', bag[item_id])
 
     request.session['bag'] = bag
-    print(request.session['bag'])
+    # print(request.session['bag'])
     return redirect(redirect_url)
