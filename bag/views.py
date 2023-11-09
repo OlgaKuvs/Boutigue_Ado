@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, reverse, HttpResponse
+from django.contrib import messages
 
 # Create your views here.
 
@@ -35,6 +36,7 @@ def add_to_bag(request, item_id):
             bag[item_id] += quantity
         else:
             bag[item_id] = quantity
+            messages.success(request, 'Product added to your bag!')
 
     request.session['bag'] = bag
     # print(request.session['bag'])
