@@ -13,7 +13,7 @@ from products.models import Product
 # from profiles.forms import UserProfileForm
 from bag.contexts import bag_contents
 
-# import stripe
+import stripe
 import json
 
 
@@ -24,6 +24,14 @@ def checkout(request):
                         "There's nothing in your bag at the moment")
         return redirect(reverse('products'))
     
+    current_bag = bag_contents(request)
+    total = current_bag['grand_total']
+    stripe_total = round(total * 100)
+    # stripe.api_key = stripe_secret_key
+    # intent = stripe.PaymentIntent.create(
+    #     amount=stripe_total,
+    #     currency=settings.STRIPE_CURRENCY,
+    # )
     order_form = OrderForm()
     template = 'checkout/checkout.html'
     context = {
